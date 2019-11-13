@@ -1,14 +1,38 @@
+{% load staticfiles %}
+
 <html>
 <head>
     <title>
         Chat
     </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "home.css" %}">
 </head>
 <body>
     <nav class="navbar fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">ChatBox</a>
+        <a class="navbar-brand" href="{% url 'home' %}">ChatBox</a>
+        <!-- Navbar Right Side -->
+
+
+
+         <div class="navbar-nav">
+            <ul class="form-inline my-2 my-lg-0">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'register'%}">Register <span class="sr-only">(current)</span></a>
+                    </li>
+   </ul>
+
+        </div>
+
+
       </nav>
+
+
+
 
 {% block content %}
 
