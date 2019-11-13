@@ -50,3 +50,9 @@ def register(request):
 
     form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('home')

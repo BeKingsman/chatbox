@@ -11,12 +11,6 @@ class Messageform(forms.ModelForm):
         fields = ['content']
 
 
-# class UserRegisterForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = User
-#         fields = ['username', 'email', ]
-
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
