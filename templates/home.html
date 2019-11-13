@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for person in users %}
+
+<div class="card" style="width: 18rem; margin-top: 50px; align-items: center;align-self: center;align:center">
+    <div class="card-body">
+      <h5 class="card-title">{{person.username}}</h5>
+      <a href="{% url 'chat' person.pk %}" class="card-link">
+        <button type="button" class="btn btn-success">Message</button>
+
+      </a>
+      
+    </div>
+  </div>
+
+
+{% endfor %}
+
+{% endblock %}
