@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for mess in all_mess %}
-<h4>{{mess}}</h4>
-{% endfor %}
+
 <form method = "post" class = "message_form" style="margin-top: 50px;">
     {% csrf_token %}
     <div class="container">
+        {% for mess in all_mess %}
+        <h4>{{mess.content}}</h4>
+        {% endfor %}
     {{form.as_p}}
         <button type="submit" class="btn btn-success">Send</button>
-       <a href="{% url 'message' mess.sent_by.user.id %}"> <button type="button" class="btn btn-primary">Refresh</button></a> 
+       <a href="{% url 'chat' id %}"> <button type="button" class="btn btn-primary">Refresh</button></a>
      </div>
 </form>
+
 
 {% endblock %}
