@@ -13,9 +13,13 @@ def homepage(request):
     return render(request, 'home.html', {'users': users})
 
 
+@login_required
 def Chat(request, pk):
 
     all_mess = Message.objects.filter(m_sent_to=request.user, sent_by=User.objects.get(pk=pk))
+    messages_sent = Message.objects.filter(sent_by=request.user, m_sent_to=User.objects.get(pk=pk))
+    mess_list = all_mess | messages_sent  # combined list
+    message_list = mess_list.order_by('time')
 
     if request.method == 'POST':
         form = Messageform(request.POST)
@@ -26,7 +30,7 @@ def Chat(request, pk):
 
     form = Messageform()
 
-    return render(request, 'message.html', {'form': form, 'all_mess': all_mess, 'id': pk})
+    return render(request, 'message.html', {'form': form, 'all_mess': all_mess, 'id': pk, 'messages_sent': messages_sent, 'mess_list': mess_list, 'message_list': message_list})
 
 
 def user_login(request):

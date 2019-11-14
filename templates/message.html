@@ -5,8 +5,18 @@
 <form method = "post" class = "message_form" style="margin-top: 50px;">
     {% csrf_token %}
     <div class="container">
-        {% for mess in all_mess %}
-        <h4>{{mess.content}}</h4>
+        {% for mess in message_list %}
+        {% if mess.m_sent_to == request.user %}
+        <div class="mess_received">
+            <h4>{{mess.content}}</h4>
+            <h6>{{mess.time}}</h6>
+        </div>
+        {% elif mess.sent_by == request.user %}
+        <div class="mess_sent">
+            <h4>{{mess.content}}</h4>
+            <h6>{{mess.time}}</h6>
+        </div>
+        {% endif %}
         {% endfor %}
     {{form.as_p}}
         <button type="submit" class="btn btn-success">Send</button>

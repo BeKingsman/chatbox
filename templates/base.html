@@ -10,6 +10,9 @@
 </head>
 <body>
     <nav class="navbar fixed-top navbar-dark bg-dark">
+        <div class="container">
+
+
         <a class="navbar-brand" href="{% url 'home' %}">ChatBox</a>
         <!-- Navbar Right Side -->
 
@@ -19,23 +22,23 @@
             <ul class="form-inline my-2 my-lg-0">
                 {% if user.is_authenticated %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
                 </li>
-                
+
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'register'%}">Register <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'register'%}">Register</a>
                     </li>
-                
+
                     {% endif %}
    </ul>
 
         </div>
 
-
+    </div>
       </nav>
 
 

@@ -8,6 +8,9 @@ class Messageform(forms.ModelForm):
 
     class Meta:
         model = Message
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 1, 'cols': 100}),
+        }
         fields = ['content']
 
 
@@ -17,5 +20,3 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-
-

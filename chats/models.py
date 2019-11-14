@@ -13,3 +13,7 @@ class Message(models.Model):
     m_sent_to = models.ForeignKey(User, on_delete=models.CASCADE,
                                   related_name='kisko_bheja', null=True)
     time = models.DateTimeField(default=datetime.now, blank=False)
+
+
+def __str__(self):
+    return "Message sent by {x} to {y}".format(self.sent_by, self.m_sent_to)
