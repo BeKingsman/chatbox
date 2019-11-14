@@ -23,7 +23,8 @@
     margin: 0 auto; /* Added */
     border-top: 1in;
     float: none; /* Added */
-    margin-bottom: 10px; /* Added */
+    margin-top: 70px; /* Added */
     border:3px solid black;
-    
+    display: flex;
+  flex-direction: column-reverse;
 }

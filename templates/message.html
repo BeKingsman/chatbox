@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="card text-white bg-primary mb-3" style="width: 35rem; height: auto; align-self: auto;">
-    <div class="card-body">
+<div class="card text-white bg-primary mb-3" style="width: 35rem; height: 700px; align-self: auto;">
+    <div class="card-body overflow-auto">
 <form method = "post" class = "message_form" style="margin-top: 50px;">
     {% csrf_token %}
-    <div class="container">
-            {{form.as_p}}
-            <button type="submit" class="btn btn-success btn-lg" style="align-self:center;">Send</button>
-           <a href="{% url 'chat' id %}"> <button type="button" class="btn btn-danger btn-lg" style="float: right;">Refresh</button></a>
-         </div>
+   
+       
+        <div class="overflow; display:flex;flex-direction:column-reverse;">
+                {{form.as_p}}
+                <button type="submit" class="btn btn-success btn-lg" style="align-self:center;">Send</button>
+               <a href="{% url 'chat' id %}"> <button type="button" class="btn btn-danger btn-lg" style="float: right;">Refresh</button></a>
+           
         {% for mess in message_list %}
         {% if mess.m_sent_to == request.user %}
         <div class="mess_received">
@@ -23,7 +25,8 @@
         </div>
         {% endif %}
         {% endfor %}
-   
+
+        
 </form>
 </div>
 </div>
