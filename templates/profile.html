@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <img id="user_image" src="{{ user.profile.image.url }}" alt="profile_pic_here!">
+    <h1 id="username">{{ user.username }}</h1>
+    <h1>{{ user.email }}</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Profile Info</legend>
+            {{ u_form.as_p }}
+            {{ i_form.as_p }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+    </form>
+
+{% endblock %}

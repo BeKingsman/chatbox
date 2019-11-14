@@ -10,16 +10,20 @@
     margin-top: 60px;
 }
 
+#user_image{
+    margin-top: 60px;
+}
+
 .mess_sent{
     text-align: right;
-    
+
 }
 
 .mess_received{
     text-align: left;
 }
 .card {
-    
+
     margin: 0 auto; /* Added */
     border-top: 1in;
     float: none; /* Added */

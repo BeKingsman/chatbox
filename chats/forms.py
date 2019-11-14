@@ -9,7 +9,7 @@ class Messageform(forms.ModelForm):
     class Meta:
         model = Message
         widgets = {
-            'content': forms.Textarea(attrs={'rows': 1,'cols':35}),
+            'content': forms.Textarea(attrs={'rows': 1, 'cols': 35}),
         }
         fields = ['content']
 
@@ -20,3 +20,17 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+
+class UserImageInfoForm(forms.ModelForm):
+
+    class Meta:
+        model = UserImageInfo
+        exclude = ('user', )
+
+
+class UserProfileInfoForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']

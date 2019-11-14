@@ -5,13 +5,13 @@
     <div class="card-body overflow-auto">
 <form method = "post" class = "message_form" style="margin-top: 50px;">
     {% csrf_token %}
-   
-       
+
+
         <div class="overflow; display:flex;flex-direction:column-reverse;">
                 {{form.as_p}}
                 <button type="submit" class="btn btn-success btn-lg" style="align-self:center;">Send</button>
                <a href="{% url 'chat' id %}"> <button type="button" class="btn btn-danger btn-lg" style="float: right;">Refresh</button></a>
-           
+
         {% for mess in message_list %}
         {% if mess.m_sent_to == request.user %}
         <div class="mess_received">
@@ -26,7 +26,7 @@
         {% endif %}
         {% endfor %}
 
-        
+
 </form>
 </div>
 </div>
