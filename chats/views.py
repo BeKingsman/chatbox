@@ -19,7 +19,7 @@ def Chat(request, pk):
     all_mess = Message.objects.filter(m_sent_to=request.user, sent_by=User.objects.get(pk=pk))
     messages_sent = Message.objects.filter(sent_by=request.user, m_sent_to=User.objects.get(pk=pk))
     mess_list = all_mess | messages_sent  # combined list
-    message_list = mess_list.order_by('time')
+    message_list = (mess_list.order_by('time')).reverse()[0:8]
 
     if request.method == 'POST':
         form = Messageform(request.POST)

@@ -1,28 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div class="card text-white bg-primary mb-3" style="width: 35rem; height: auto; align-self: auto;">
+    <div class="card-body">
 <form method = "post" class = "message_form" style="margin-top: 50px;">
     {% csrf_token %}
     <div class="container">
+            {{form.as_p}}
+            <button type="submit" class="btn btn-success btn-lg" style="align-self:center;">Send</button>
+           <a href="{% url 'chat' id %}"> <button type="button" class="btn btn-danger btn-lg" style="float: right;">Refresh</button></a>
+         </div>
         {% for mess in message_list %}
         {% if mess.m_sent_to == request.user %}
         <div class="mess_received">
             <h4>{{mess.content}}</h4>
-            <h6>{{mess.time}}</h6>
+            <h6><small>{{mess.time}}</small></h6>
         </div>
         {% elif mess.sent_by == request.user %}
         <div class="mess_sent">
             <h4>{{mess.content}}</h4>
-            <h6>{{mess.time}}</h6>
+            <h6><small>{{mess.time}}</small></h6>
         </div>
         {% endif %}
         {% endfor %}
-    {{form.as_p}}
-        <button type="submit" class="btn btn-success">Send</button>
-       <a href="{% url 'chat' id %}"> <button type="button" class="btn btn-primary">Refresh</button></a>
-     </div>
+   
 </form>
+</div>
+</div>
 
 
 {% endblock %}

@@ -9,7 +9,7 @@ class Messageform(forms.ModelForm):
     class Meta:
         model = Message
         widgets = {
-            'content': forms.Textarea(attrs={'rows': 1, 'cols': 100}),
+            'content': forms.Textarea(attrs={'rows': 1,'cols':35}),
         }
         fields = ['content']
 

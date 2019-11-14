@@ -18,3 +18,12 @@
 .mess_received{
     text-align: left;
 }
+.card {
+    
+    margin: 0 auto; /* Added */
+    border-top: 1in;
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+    border:3px solid black;
+    
+}
