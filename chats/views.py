@@ -14,17 +14,21 @@ def homepage(request):
 
 
 def Chat(request, pk):
+
+    all_mess = Message.objects.filter(m_sent_to = request.user, sent_by = User.objects.get(pk=pk))
+    
+
     if request.method == 'POST':
         form = Messageform(request.POST)
         form.instance.m_sent_to = User.objects.get(pk=pk)
         form.instance.sent_by = request.user
         if form.is_valid:
             form.save()
-            return redirect('home')
+            
 
     form = Messageform()
 
-    return render(request, 'message.html', {'form': form})
+    return render(request, 'message.html', {'form': form,'all_mess':all_mess})
 
 
 def user_login(request):
@@ -34,9 +38,10 @@ def user_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
+        if(authenticate(username=username, password=password)):
+          user = authenticate(username=username, password=password)
 
-        login(request, user)
+          login(request, user)
         return redirect('home')
     return render(request, 'login.html')
 
