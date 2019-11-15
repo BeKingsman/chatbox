@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 
 # Create your views here.
@@ -50,13 +51,35 @@ def user_login(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
+        u_form = UserRegisterForm(data=request.POST)
+        p_form = ProfileForm(data=request.POST)
+        if u_form.is_valid() and p_form.is_valid():
+            user = u_form.save()
+            user.save()
+
+            p1 = p_form.save(commit=False)
+            p1.user = user
+
+            if 'image' in request.FILES:
+                p1.image = request.FILES['image']
+
+            p1.save()
+            messages.success(
+                request, f'Your account has been updated!')
             return redirect('login')
 
-    form = UserRegisterForm()
-    return render(request, 'register.html', {'form': form})
+        else:
+            print(u_form.errors, p_form.errors)
+            return HttpResponse('<h1> Karta reh koshish </h1>')
+
+    else:
+        u_form = UserRegisterForm()
+        p_form = ProfileForm()
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'register.html', context)
 
 
 @login_required
@@ -67,18 +90,21 @@ def user_logout(request):
 
 @login_required
 def user_profile(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         u_form = UserProfileInfoForm(request.POST, instance=request.user)
-        i_form = UserImageInfoForm(user=request.POST, image=request.FILES,
-                                   instance=request.user.profile)
-        if u_form.is_valid() and i_form.is_valid():
+        p_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
             u_form.save()
-            i_form.save()
-            return redirect('home')
+            p_form.save()
+            messages.success(
+                request, f'Your account has been updated!')
+            return redirect('profile')
 
-        else:
-            return HttpResponse("<h1> Sorry </h1>")
-
-    u_form = UserProfileInfoForm(request.POST)
-    i_form = UserImageInfoForm(request.POST, request.FILES)
-    return render(request, 'profile.html', {'u_form': u_form, 'i_form': i_form})
+    else:
+        u_form = UserProfileInfoForm(instance=request.user)
+        p_form = ProfileForm(instance=request.user.profile)
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'profile.html', context)

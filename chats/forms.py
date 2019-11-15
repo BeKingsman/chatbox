@@ -22,10 +22,10 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
-class UserImageInfoForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
 
     class Meta:
-        model = UserImageInfo
+        model = Profile
         fields = ['image']
 
 

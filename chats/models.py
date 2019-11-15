@@ -5,10 +5,10 @@ from datetime import datetime
 # Create your models here.
 
 
-class UserImageInfo(models.Model):
+class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default="default.jpg", upload_to='profile_pics')
+    image = models.ImageField(default="default.jpg", upload_to='profile_pics', blank=True)
 
     def __str__(self):
         return self.user.username

@@ -2,10 +2,11 @@
 
 {% block content %}
 
-<form method="post" class="register_form">
+<form method="post" class="register_form" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container">
-        {{form.as_p}}
+        {{u_form.as_p}}
+        {{p_form.as_p}}
         <button type="submit" class="btn btn-success">Register</button>
     </div>
 </form>
