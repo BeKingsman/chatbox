@@ -9,7 +9,7 @@ from django.contrib import messages
 
 # Create your views here.
 def homepage(request):
-    users = User.objects.all()
+    users = User.objects.all().exclude(username=request.user)
 
     return render(request, 'home.html', {'users': users})
 
