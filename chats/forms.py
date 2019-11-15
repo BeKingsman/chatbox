@@ -26,7 +26,7 @@ class UserImageInfoForm(forms.ModelForm):
 
     class Meta:
         model = UserImageInfo
-        exclude = ('user', )
+        fields = ['image']
 
 
 class UserProfileInfoForm(forms.ModelForm):

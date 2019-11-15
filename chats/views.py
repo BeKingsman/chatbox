@@ -69,12 +69,16 @@ def user_logout(request):
 def user_profile(request):
     if request.method == "POST":
         u_form = UserProfileInfoForm(request.POST, instance=request.user)
-        i_form = UserImageInfoForm(request.POST, request.FILES, instance=request.user.profile)
+        i_form = UserImageInfoForm(user=request.POST, image=request.FILES,
+                                   instance=request.user.profile)
         if u_form.is_valid() and i_form.is_valid():
             u_form.save()
             i_form.save()
             return redirect('home')
 
-    u_form = UserProfileInfoForm()
-    i_form = UserImageInfoForm()
+        else:
+            return HttpResponse("<h1> Sorry </h1>")
+
+    u_form = UserProfileInfoForm(request.POST)
+    i_form = UserImageInfoForm(request.POST, request.FILES)
     return render(request, 'profile.html', {'u_form': u_form, 'i_form': i_form})
