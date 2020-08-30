@@ -1,0 +1,10 @@
+.vscode
+*.pyc
+*~
+__pycache__
+.DS_Store
+/env
+db.sqlite3
+*/migrations
+*/migrations/*
+keyconfig.py
