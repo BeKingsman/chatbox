@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'chats.apps.ChatsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'chatbox.urls'
+ASGI_APPLICATION = "chatbox.routing.application"
 
 TEMPLATES = [
     {
@@ -70,8 +72,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'chatbox.wsgi.application'
-
+# WSGI_APPLICATION = 'chatbox.wsgi.application'
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

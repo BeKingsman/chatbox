@@ -9,8 +9,8 @@
 
         <div class="overflow; display:flex;flex-direction:column-reverse;">
                 {{form.as_p}}
-                <button type="submit" class="btn btn-success btn-lg" style="align-self:center;">Send</button>
-               <a href="{% url 'chat' id %}"> <button type="button" class="btn btn-danger btn-lg" style="float: right;">Refresh</button></a>
+                <button type="submit" id="send-btn" class="btn btn-success btn-lg" style="align-self:center;">Send</button>
+               <a href="{% url 'chat' username %}"> <button type="button" class="btn btn-danger btn-lg" style="float: right;">Refresh</button></a>
 
         {% for mess in message_list %}
         {% if mess.m_sent_to == request.user %}
@@ -30,6 +30,44 @@
 </form>
 </div>
 </div>
+
+<script>
+
+    var formData = $('.message_form');
+
+    var loc = window.location
+    var wsStart = "ws://";
+    if(location.protocol === "https:") wsStart = "wss://"
+    var endpoint = wsStart + loc.host + loc.pathname
+    var socket = new WebSocket(endpoint);
+    
+    socket.onmessage = (e) => {
+      console.log("message", e)
+    }
+    
+    socket.onopen = (e) => {
+      console.log("open", e);
+      document.getElementById('send-btn').onclick = function(event){
+        event.preventDefault();
+        if(!document.getElementById('id_content').value) alert("please fill a message");
+        else {
+          var finalData = {
+            "content": document.getElementById('id_content').value  
+          }
+          socket.send(JSON.stringify(finalData));
+          formData[0].reset();
+        }
+      }
+    }
+    
+    socket.onerror = (e) => {
+      console.log("error", e);
+    }
+    
+    socket.onclose = (e) => {
+      console.log("close", e);
+    }
+    </script>
 
 
 {% endblock %}
